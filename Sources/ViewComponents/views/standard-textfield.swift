@@ -85,7 +85,7 @@ public struct StandardTextField: View {
                 .opacity(text.isEmpty ? 0 : 1)
             }
             .padding(.horizontal, 8)
-            .padding(.vertical, 6)
+            .padding(.vertical, 4)
             .background(
                 RoundedRectangle(cornerRadius: 5)
                     .stroke(borderColor, lineWidth: 1)
