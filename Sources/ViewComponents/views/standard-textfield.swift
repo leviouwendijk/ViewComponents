@@ -21,6 +21,17 @@ public struct StandardTextField: View {
     @FocusState private var isFocused: Bool
     @State private var validationMessage: String?
 
+    public var placeholderFormatted: String? {
+        if let placeholder {
+            let base = "\"" + placeholder + "\""
+            let suffixed = base + " (" + label + ")"
+            return placeholderLabelSuffix ? suffixed : base 
+        }
+        else {
+            return nil
+        }
+    }
+
     public init(
         _ label: String,
         text: Binding<String>,
@@ -60,8 +71,7 @@ public struct StandardTextField: View {
 
                 ZStack(alignment: .leading) {
                     if text.isEmpty, let placeholder {
-                        let suffixed = placeholder + " (" + label + ")"
-                        Text(placeholderLabelSuffix ? suffixed : placeholder)
+                        Text(placeholderFormatted ?? placeholder)
                             .foregroundColor(.secondary)
                             .padding(.leading, 1)
                     }
