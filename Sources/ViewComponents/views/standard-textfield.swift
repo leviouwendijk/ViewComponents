@@ -29,7 +29,7 @@ public struct StandardTextField: View {
         icon: String? = nil,
         maxWidth: CGFloat? = nil,
         validation: ValidationType? = nil,
-        hideLabel: Bool = true,
+        hideLabel: Bool = false,
         placeholderLabelSuffix: Bool = true
     ) {
         self.label               = label
@@ -49,6 +49,7 @@ public struct StandardTextField: View {
             Text(label)
                 .font(.subheadline)
                 .bold()
+                .opacity(0.8)
             }
 
             HStack {
