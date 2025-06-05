@@ -55,6 +55,7 @@ public struct StandardTextField: View {
                             .padding(.leading, 1)
                     }
                     TextField("", text: $text)
+                        .font(.body)
                         .textFieldStyle(PlainTextFieldStyle())
                         .focused($isFocused)
                         // .onChange(of: text) { newValue in
@@ -77,8 +78,8 @@ public struct StandardTextField: View {
                 .disabled(text.isEmpty)
                 .opacity(text.isEmpty ? 0 : 1)
             }
-            .padding(.horizontal, 12)
-            .padding(.vertical, 8)
+            .padding(.horizontal, 8)
+            .padding(.vertical, 6)
             .background(
                 RoundedRectangle(cornerRadius: 8)
                     .stroke(borderColor, lineWidth: 1)
