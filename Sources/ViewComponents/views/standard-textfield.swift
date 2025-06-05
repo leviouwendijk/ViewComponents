@@ -15,6 +15,7 @@ public struct StandardTextField: View {
     public let maxWidth: CGFloat?
     public let validation: ValidationType?
     public let hideLabel: Bool
+    public let placeholderLabelSuffix: Bool
 
     @Binding public var text: String
     @FocusState private var isFocused: Bool
@@ -28,7 +29,8 @@ public struct StandardTextField: View {
         icon: String? = nil,
         maxWidth: CGFloat? = nil,
         validation: ValidationType? = nil,
-        hideLabel: Bool = false
+        hideLabel: Bool = false,
+        placeholderLabelSuffix: Bool = false
     ) {
         self.label               = label
         self._text               = text
@@ -38,6 +40,7 @@ public struct StandardTextField: View {
         self.maxWidth            = maxWidth
         self.validation = validation
         self.hideLabel = hideLabel
+        self.placeholderLabelSuffix = placeholderLabelSuffix
     }
 
     public var body: some View {
@@ -56,7 +59,8 @@ public struct StandardTextField: View {
 
                 ZStack(alignment: .leading) {
                     if text.isEmpty, let placeholder {
-                        Text(placeholder)
+                        let suffixed = placeholder + " (" + label + ")"
+                        Text(placeholderLabelSuffix ? suffixed : placeholder)
                             .foregroundColor(.secondary)
                             .padding(.leading, 1)
                     }
