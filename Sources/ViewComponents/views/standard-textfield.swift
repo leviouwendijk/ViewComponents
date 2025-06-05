@@ -29,8 +29,8 @@ public struct StandardTextField: View {
         icon: String? = nil,
         maxWidth: CGFloat? = nil,
         validation: ValidationType? = nil,
-        hideLabel: Bool = false,
-        placeholderLabelSuffix: Bool = false
+        hideLabel: Bool = true,
+        placeholderLabelSuffix: Bool = true
     ) {
         self.label               = label
         self._text               = text
