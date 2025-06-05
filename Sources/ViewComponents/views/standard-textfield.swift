@@ -14,6 +14,7 @@ public struct StandardTextField: View {
     /// Maximum width (nil = flexible).
     public let maxWidth: CGFloat?
     public let validation: ValidationType?
+    public let hideLabel: Bool
 
     @Binding public var text: String
     @FocusState private var isFocused: Bool
@@ -26,7 +27,8 @@ public struct StandardTextField: View {
         helperText: String? = nil,
         icon: String? = nil,
         maxWidth: CGFloat? = nil,
-        validation: ValidationType? = nil
+        validation: ValidationType? = nil,
+        hideLabel: Bool = false
     ) {
         self.label               = label
         self._text               = text
@@ -35,12 +37,16 @@ public struct StandardTextField: View {
         self.icon                = icon
         self.maxWidth            = maxWidth
         self.validation = validation
+        self.hideLabel = hideLabel
     }
 
     public var body: some View {
         VStack(alignment: .leading, spacing: 4) {
+            if !hideLabel {
             Text(label)
-                .font(.headline)
+                .font(.subheadline)
+                .bold()
+            }
 
             HStack {
                 if let icon = icon {
@@ -81,7 +87,7 @@ public struct StandardTextField: View {
             .padding(.horizontal, 8)
             .padding(.vertical, 6)
             .background(
-                RoundedRectangle(cornerRadius: 8)
+                RoundedRectangle(cornerRadius: 5)
                     .stroke(borderColor, lineWidth: 1)
             )
 
