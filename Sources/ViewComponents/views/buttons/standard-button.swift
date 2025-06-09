@@ -8,6 +8,7 @@ public struct StandardButton: View {
     public let subtitle: String
     public let action: () -> Void
     public let animationDuration: TimeInterval
+    public let image: String?
 
     @State private var isPressed: Bool = false
     @Environment(\.isEnabled) private var isEnabled: Bool
@@ -17,13 +18,15 @@ public struct StandardButton: View {
         title: String,
         subtitle: String = "",
         animationDuration: Double = 0.2,
-        action: @escaping () -> Void
+        action: @escaping () -> Void,
+        image: String? = nil
     ) {
         self.type = type
         self.title = title
         self.subtitle = subtitle
         self.animationDuration = animationDuration
         self.action = action
+        self.image = image
     }
 
     private var buttonColor: Color {
@@ -53,19 +56,23 @@ public struct StandardButton: View {
     }
 
     private var imageSystemName: String {
-        switch type {
-        case .copy:
-            return "document.on.document"
-        case .clear:
-            return "xmark.circle"
-        case .load:
-            return "square.and.arrow.down.on.square"
-        case .submit:
-            return "paperplane.fill"
-        case .execute:
-            return "apple.terminal"
-        case .delete:
-            return "trash.fill"
+        if let image = self.image {
+            return image
+        } else {
+            switch type {
+            case .copy:
+                return "document.on.document"
+            case .clear:
+                return "xmark.circle"
+            case .load:
+                return "square.and.arrow.down.on.square"
+            case .submit:
+                return "paperplane.fill"
+            case .execute:
+                return "apple.terminal"
+            case .delete:
+                return "trash.fill"
+            }
         }
     }
 
