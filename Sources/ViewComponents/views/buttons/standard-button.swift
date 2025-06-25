@@ -2,13 +2,43 @@ import Foundation
 import SwiftUI
 import plate
 
+public struct ColorStyleConfiguration: Sendable {
+    public let color: Color?
+    public let foregroundColor: Color?
+    
+    public init(
+        color: Color?,
+        foregroundColor: Color?
+    ) {
+        self.color = color
+        self.foregroundColor = foregroundColor
+    }
+}
+
+public struct ButtonAppearanceConfiguration: Sendable {
+    public let image: String?
+    public let color: ColorStyleConfiguration?
+    public let escapeColor: ColorStyleConfiguration?
+    
+    public init(
+        image: String?,
+        color: ColorStyleConfiguration?,
+        escapeColor: ColorStyleConfiguration?
+    ) {
+        self.image = image
+        self.color = color
+        self.escapeColor = escapeColor
+    }
+}
+
 public struct StandardButton: View {
     public let type: StandardButtonType
     public let title: String
     public let subtitle: String
     public let action: () -> Void
     public let animationDuration: TimeInterval
-    public let image: String?
+    // public let image: String?
+    public let appearance: ButtonAppearanceConfiguration?
 
     @State private var isPressed: Bool = false
     @Environment(\.isEnabled) private var isEnabled: Bool
@@ -19,44 +49,54 @@ public struct StandardButton: View {
         subtitle: String = "",
         animationDuration: Double = 0.2,
         action: @escaping () -> Void,
-        image: String? = nil
+        // image: String? = nil
+        appearance: ButtonAppearanceConfiguration? = nil
     ) {
         self.type = type
         self.title = title
         self.subtitle = subtitle
         self.animationDuration = animationDuration
         self.action = action
-        self.image = image
+        // self.image = image
+        self.appearance = appearance
     }
 
     private var buttonColor: Color {
-        switch type {
-        case .clear:
-            return Color.gray.opacity(0.2)
-        case .load, .copy:
-            return Color.gray
-        case .submit:
-            return Color.blue
-        case .execute:
-            return Color.orange
-        case .delete:
-            return Color.red
+        if let color = self.appearance?.color?.color {
+            return color
+        } else {
+            switch type {
+            case .clear:
+                return Color.gray.opacity(0.2)
+            case .load, .copy:
+                return Color.gray
+            case .submit:
+                return Color.blue
+            case .execute:
+                return Color.orange
+            case .delete:
+                return Color.red
+            }
         }
     }
 
     private var foregroundColor: Color {
-        switch type {
-        case .clear, .load, .copy:
-            return Color.primary
-        case .execute:
-            return Color.black
-        case .submit, .delete:
-            return Color.white
+        if let foreground = self.appearance?.color?.foregroundColor {
+            return foreground
+        } else {
+            switch type {
+            case .clear, .load, .copy:
+                return Color.primary
+            case .execute:
+                return Color.black
+            case .submit, .delete:
+                return Color.white
+            }
         }
     }
 
     private var imageSystemName: String {
-        if let image = self.image {
+        if let image = self.appearance?.image {
             return image
         } else {
             switch type {
