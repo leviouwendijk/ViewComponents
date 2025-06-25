@@ -7,8 +7,8 @@ public struct ColorStyleConfiguration: Sendable {
     public let foregroundColor: Color?
     
     public init(
-        color: Color?,
-        foregroundColor: Color?
+        color: Color? = nil,
+        foregroundColor: Color? = nil
     ) {
         self.color = color
         self.foregroundColor = foregroundColor
@@ -21,9 +21,9 @@ public struct ButtonAppearanceConfiguration: Sendable {
     public let escapeColor: ColorStyleConfiguration?
     
     public init(
-        image: String?,
-        color: ColorStyleConfiguration?,
-        escapeColor: ColorStyleConfiguration?
+        image: String? = nil,
+        color: ColorStyleConfiguration? = nil,
+        escapeColor: ColorStyleConfiguration? = nil
     ) {
         self.image = image
         self.color = color
