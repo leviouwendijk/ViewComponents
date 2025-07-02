@@ -1,15 +1,15 @@
 import SwiftUI
 
-struct DebouncedField: View {
-    let label: String
-    let placeholder: String
+public struct DebouncedField: View {
+    public let label: String
+    public let placeholder: String
     @State private var buffer: String
-    let ms: Int
-    let onCommit: (String) -> Void
+    public let ms: Int
+    public let onCommit: (String) -> Void
 
     @State private var workItem: DispatchWorkItem?
 
-    init(
+    public init(
         label: String,
         text: String,
         placeholder: String = "",
@@ -23,7 +23,7 @@ struct DebouncedField: View {
         self._buffer     = State(initialValue: text)
     }
 
-    var body: some View {
+    public var body: some View {
         StandardTextField(label, text: $buffer, placeholder: placeholder)
         .onChange(of: buffer) { newValue in
             workItem?.cancel()
