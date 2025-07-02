@@ -23,12 +23,13 @@ where
 
     public var body: some View {
         ZStack(alignment: .topLeading) {
+            // MARK: Header
             Button(action: {
                 withAnimation(.easeInOut(duration: 0.2)) {
                     isExpanded.toggle()
                 }
             }) {
-                HStack {
+                HStack(spacing: 8) {
                     Text(selected.rawValue.capitalized)
                         .lineLimit(1)
                         .truncationMode(.tail)
@@ -37,16 +38,22 @@ where
                         .font(.system(size: 13, weight: .semibold))
                         .foregroundColor(.gray)
                 }
-                .padding(.vertical, 6)
+                .padding(.vertical, 6)          // same as WA
+                .padding(.horizontal, 8)        // fill out the tap area
                 .frame(minWidth: labelWidth, alignment: .leading)
                 .background(
+                    RoundedRectangle(cornerRadius: 6)
+                        .fill(Color(.windowBackgroundColor)) // fill BG
+                )
+                .overlay(
                     RoundedRectangle(cornerRadius: 6)
                         .stroke(Color.secondary.opacity(0.6), lineWidth: 2)
                 )
             }
             .buttonStyle(PlainButtonStyle())
-            .contentShape(Rectangle())
+            .contentShape(Rectangle())         // entire frame is tappable
 
+            // MARK: List
             if isExpanded {
                 VStack(spacing: 0) {
                     ScrollView {
@@ -60,7 +67,8 @@ where
                                 }) {
                                     Text(option.rawValue.capitalized)
                                         .frame(maxWidth: .infinity, alignment: .leading)
-                                        .padding(.vertical, 6)
+                                        .padding(.vertical, 4)
+                                        .padding(.horizontal, 8)
                                 }
                                 .disabled(option == selected)
                             }
