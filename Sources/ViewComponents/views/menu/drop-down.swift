@@ -1,6 +1,6 @@
 import SwiftUI
 
-public struct DropDownEnum<Option>: View
+public struct EnumDropdown<Option>: View
 where
     Option: CaseIterable & Hashable & RawRepresentable,
     Option.RawValue == String
