@@ -60,10 +60,12 @@ public struct SelectableRow: View {
             cornerRadius: 5
         ))
         .onTapGesture {
-            withAnimation(.easeInOut(duration: animationDuration)) {
-                action()
-            }
+            if !isDisabled {
+                withAnimation(.easeInOut(duration: animationDuration)) {
+                    action()
+                }
             // action()
+            }
         }
     }
 }
