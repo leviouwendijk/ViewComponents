@@ -38,6 +38,7 @@ public struct SelectableRow: View {
                     // .foregroundColor(Color("NearBlack"))
                     // .foregroundColor(isSelected ? Color.black : Color.secondary)
                     .foregroundColor(Color.secondary)
+                    .strikethrough(isDisabled, color: .gray)
             }
             Spacer()
         }
