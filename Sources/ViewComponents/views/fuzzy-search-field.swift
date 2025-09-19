@@ -27,7 +27,8 @@ public struct FuzzySearchField: View {
                     Text(level.title)
                         .font(.caption2)
                         .padding(.vertical, 4)
-                        .padding(.horizontal, 6)
+                        // .padding(.horizontal, 6)
+                        .padding(.horizontal, 12)
                         .background(
                             searchStrictness == level
                                 ? Color.accentColor.opacity(0.2)
