@@ -25,19 +25,20 @@ public struct FuzzySearchField: View {
             HStack(spacing: 4) {
                 ForEach(SearchStrictness.allCases) { level in
                     Text(level.title)
-                        .font(.caption2)
-                        .padding(.vertical, 4)
-                        // .padding(.horizontal, 6)
-                        .padding(.horizontal, 12)
-                        .background(
-                            searchStrictness == level
-                                ? Color.accentColor.opacity(0.2)
-                                : Color.secondary.opacity(0.1)
-                        )
-                        .cornerRadius(4)
-                        .onTapGesture {
-                            searchStrictness = level
-                        }
+                    .font(.caption2)
+                    .padding(.vertical, 4)
+                    // .padding(.horizontal, 6)
+                    .padding(.horizontal, 6)
+                    .background(
+                        searchStrictness == level
+                            ? Color.accentColor.opacity(0.2)
+                            : Color.secondary.opacity(0.1)
+                    )
+                    .cornerRadius(4)
+                    .onTapGesture {
+                        searchStrictness = level
+                    }
+                    .frame(minWidth: 12)
                 }
             }
         }
