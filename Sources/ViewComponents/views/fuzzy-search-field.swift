@@ -38,7 +38,7 @@ public struct FuzzySearchField: View {
                     .onTapGesture {
                         searchStrictness = level
                     }
-                    .frame(minWidth: 20)
+                    .frame(minWidth: 35)
                 }
             }
         }
