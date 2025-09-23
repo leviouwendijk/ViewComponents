@@ -4,6 +4,7 @@ import plate
 
 public struct SelectableRow: View {
     public let title: String
+    public let subtitle: String?
     public let isSelected: Bool
     public let isDisabled: Bool
     public let action: () -> Void
@@ -11,12 +12,14 @@ public struct SelectableRow: View {
 
     public init(
         title: String,
+        subtitle: String? = nil,
         isSelected: Bool,
         isDisabled: Bool = false,
         animationDuration: Double = 0.2,
         action: @escaping () -> Void
     ) {
         self.title = title
+        self.subtitle = subtitle
         self.isSelected = isSelected
         self.isDisabled = isDisabled
         self.animationDuration = animationDuration
@@ -27,18 +30,32 @@ public struct SelectableRow: View {
         HStack {
             if isSelected {
                 Text(title)
-                    // .font(.headline)
-                    // .foregroundColor(Color("NearBlack"))
-                    .foregroundColor(Color.primary)
-                    // .bold()
-                    .strikethrough(isDisabled, color: .gray)
+                // .font(.headline)
+                // .foregroundColor(Color("NearBlack"))
+                .foregroundColor(Color.primary)
+                // .bold()
+                .strikethrough(isDisabled, color: .gray)
+
+                if let sub = subtitle {
+                    Text(sub)
+                    .font(.caption)
+                    .fontWeight(.thin)
+                    .foregroundColor(Color.secondary)
+                }
             } else {
                 Text(title)
-                    // .font(.headline)
-                    // .foregroundColor(Color("NearBlack"))
-                    // .foregroundColor(isSelected ? Color.black : Color.secondary)
+                // .font(.headline)
+                // .foregroundColor(Color("NearBlack"))
+                // .foregroundColor(isSelected ? Color.black : Color.secondary)
+                .foregroundColor(Color.secondary)
+                .strikethrough(isDisabled, color: .gray)
+
+                if let sub = subtitle {
+                    Text(sub)
+                    .font(.caption)
+                    .fontWeight(.thin)
                     .foregroundColor(Color.secondary)
-                    .strikethrough(isDisabled, color: .gray)
+                }
             }
             Spacer()
         }
