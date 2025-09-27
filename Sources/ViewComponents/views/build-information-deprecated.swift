@@ -2,7 +2,8 @@ import SwiftUI
 import plate
 import Structures
 
-// @available(*, deprecated, message: "Superseded by BuildInformationSwitch")
+@available(*, deprecated, message: "Superseded by BuildInformationSwitch")
+public struct BuildInformationStatic {}
 // public struct BuildInformationStatic: View {
 //     public let specification: BuildSpecification
 //     public let alignment: AlignmentStyle
@@ -69,6 +70,7 @@ import Structures
 //     }
 // }
 
+// MOVED TO COMPOSITIONS LIBRARY
 // public struct BuildInformationSwitch: View {
 //     // public let specification: BuildSpecification
 //     // public let localBuild: BuildObjectConfiguration
@@ -218,56 +220,58 @@ import Structures
 //     }
 // }
 
-enum UpdateCheckError: Error, LocalizedError {
-    case missingUpdateURL
-    case invalidUpdateURL(String)
-    case networkFailure(Error)
-    case remoteParseFailure(Error)
+// DEPRECATED, NOT CALLED ANY LONGER (assumed)
+// this logic now exists in Executable lib
+// enum UpdateCheckError: Error, LocalizedError {
+//     case missingUpdateURL
+//     case invalidUpdateURL(String)
+//     case networkFailure(Error)
+//     case remoteParseFailure(Error)
 
-    var errorDescription: String? {
-        switch self {
-            case .missingUpdateURL:
-                return "PKL is missing the `update` URL."
-            case .invalidUpdateURL(let str):
-                return "Invalid update URL in PKL: \(str)"
-            case .networkFailure(let err):
-                return "Network error: \(err.localizedDescription)"
-            case .remoteParseFailure(let err):
-                return "Failed to parse remote build-object: \(err)"
-        }
-    }
-}
+//     var errorDescription: String? {
+//         switch self {
+//             case .missingUpdateURL:
+//                 return "PKL is missing the `update` URL."
+//             case .invalidUpdateURL(let str):
+//                 return "Invalid update URL in PKL: \(str)"
+//             case .networkFailure(let err):
+//                 return "Network error: \(err.localizedDescription)"
+//             case .remoteParseFailure(let err):
+//                 return "Failed to parse remote build-object: \(err)"
+//         }
+//     }
+// }
 
-public func fetchRemoteBuildObject() async throws -> BuildObjectConfiguration {
-    let localURL = try BuildObjectConfiguration.traverseForBuildObjectPkl(buildFile: "build-object.pkl")
-    let localCfg = try BuildObjectConfiguration.parse(from: localURL)
-    let updateString = localCfg.update
+// public func fetchRemoteBuildObject() async throws -> BuildObjectConfiguration {
+//     let localURL = try BuildObjectConfiguration.traverseForBuildObjectPkl(buildFile: "build-object.pkl")
+//     let localCfg = try BuildObjectConfiguration.parse(from: localURL)
+//     let updateString = localCfg.update
 
-    guard let remoteURL = URL(string: updateString)
-    else {
-        throw UpdateCheckError.invalidUpdateURL(localCfg.update)
-    }
+//     guard let remoteURL = URL(string: updateString)
+//     else {
+//         throw UpdateCheckError.invalidUpdateURL(localCfg.update)
+//     }
     
-    let request = URLRequest(url: remoteURL)
-    let (data, response) = try await URLSession.shared.data(for: request)
+//     let request = URLRequest(url: remoteURL)
+//     let (data, response) = try await URLSession.shared.data(for: request)
     
-    guard let http = response as? HTTPURLResponse,
-          http.statusCode == 200
-    else {
-        let code = (response as? HTTPURLResponse)?.statusCode ?? -1
-        let networkErr = NSError(
-            domain: "ResponderApp.UpdateCheck",
-            code: code,
-            userInfo: [NSLocalizedDescriptionKey: "HTTP request failed with status code \(code)"]
-        )
-        throw UpdateCheckError.networkFailure(networkErr)
-    }
+//     guard let http = response as? HTTPURLResponse,
+//           http.statusCode == 200
+//     else {
+//         let code = (response as? HTTPURLResponse)?.statusCode ?? -1
+//         let networkErr = NSError(
+//             domain: "ResponderApp.UpdateCheck",
+//             code: code,
+//             userInfo: [NSLocalizedDescriptionKey: "HTTP request failed with status code \(code)"]
+//         )
+//         throw UpdateCheckError.networkFailure(networkErr)
+//     }
     
-    guard let text = String(data: data, encoding: .utf8) else {
-        throw UpdateCheckError.remoteParseFailure(
-            NSError(domain: "", code: -1, userInfo: [NSLocalizedDescriptionKey: "Invalid UTF-8 data"])
-        )
-    }
+//     guard let text = String(data: data, encoding: .utf8) else {
+//         throw UpdateCheckError.remoteParseFailure(
+//             NSError(domain: "", code: -1, userInfo: [NSLocalizedDescriptionKey: "Invalid UTF-8 data"])
+//         )
+//     }
     
-    return try PklParser(text).parseBuildObject()
-}
+//     return try PklParser(text).parseBuildObject()
+// }
