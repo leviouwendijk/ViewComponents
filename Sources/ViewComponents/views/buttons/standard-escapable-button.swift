@@ -7,7 +7,7 @@ public struct StandardEscapableButton: View {
     public let title: String
     public let cancelTitle: String?
     public let subtitle: String
-    public let action: () -> Void
+    public let action: @MainActor () async -> Void
     public let animationDuration: TimeInterval
 
     @State private var isPressed: Bool = false
@@ -22,7 +22,7 @@ public struct StandardEscapableButton: View {
         cancelTitle: String? = nil,
         subtitle: String = "",
         animationDuration: Double = 0.2,
-        action: @escaping () -> Void
+        action: @escaping @MainActor () async -> Void
     ) {
         self.type = type
         self.title = title
@@ -149,7 +149,9 @@ public struct StandardEscapableButton: View {
                 }
 
                 if inside {
-                    action()
+                    Task { @MainActor in
+                        await action()
+                    }
                 }
             }
         )

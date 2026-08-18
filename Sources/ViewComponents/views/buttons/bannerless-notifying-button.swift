@@ -6,7 +6,7 @@ public struct BannerlessNotifyingButton: View {
     public let type: StandardButtonType
     public let title: String
     public let subtitle: String
-    public let action: () -> Void
+    public let action: @MainActor () async -> Void
     public let animationDuration: TimeInterval
     @ObservedObject public var notifier: NotificationBannerController
 
@@ -18,7 +18,7 @@ public struct BannerlessNotifyingButton: View {
         title: String,
         subtitle: String = "",
         animationDuration: Double = 0.2,
-        action: @escaping () -> Void,
+        action: @escaping @MainActor () async -> Void,
         notifier: NotificationBannerController
     ) {
         self.type = type
@@ -111,7 +111,9 @@ public struct BannerlessNotifyingButton: View {
                 withAnimation(.easeInOut(duration: animationDuration)) {
                     isPressed = false
                 }
-                action()
+                Task { @MainActor in
+                    await action()
+                }
             }
         )
     }

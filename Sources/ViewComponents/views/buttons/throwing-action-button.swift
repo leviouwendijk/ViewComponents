@@ -7,7 +7,7 @@ public struct ThrowingEscapableButton: View {
     public let title: String
     public let cancelTitle: String?
     public let subtitle: String
-    public let action: () throws -> Void
+    public let action: @MainActor () async throws -> Void
     public let animationDuration: TimeInterval
 
     @State private var isPressed: Bool = false
@@ -26,7 +26,7 @@ public struct ThrowingEscapableButton: View {
         cancelTitle: String? = nil,
         subtitle: String = "",
         animationDuration: Double = 0.2,
-        action: @escaping () throws -> Void
+        action: @escaping @MainActor () async throws -> Void
     ) {
         self.type = type
         self.title = title
@@ -160,25 +160,27 @@ public struct ThrowingEscapableButton: View {
                 }
 
                 if inside {
-                    do {
-                        try action()
+                    Task { @MainActor in
+                        do {
+                            try await action()
 
-                        withAnimation {
-                            showActionResult = true
-                            actionSuccess = true
-                            actionMessage = "Success"
+                            withAnimation {
+                                showActionResult = true
+                                actionSuccess = true
+                                actionMessage = "Success"
+                            }
+                        } catch {
+                            withAnimation {
+                                showActionResult = true
+                                actionSuccess = false
+                                actionMessage = error.localizedDescription
+                            }
                         }
-                    } catch {
-                        withAnimation {
-                            showActionResult = true
-                            actionSuccess = false
-                            actionMessage = error.localizedDescription
-                        }
-                    }
 
-                    DispatchQueue.main.asyncAfter(deadline: .now() + 3) {
-                        withAnimation { 
-                            showActionResult = false 
+                        DispatchQueue.main.asyncAfter(deadline: .now() + 3) {
+                            withAnimation {
+                                showActionResult = false
+                            }
                         }
                     }
                 }
