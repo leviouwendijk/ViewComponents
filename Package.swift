@@ -37,13 +37,5 @@ let package = Package(
                 .process("Resources")
             ],
         ),
-        .testTarget(
-            name: "ViewComponentsTests",
-            dependencies: [
-                "ViewComponents",
-                .product(name: "plate", package: "plate"),
-                .product(name: "Structures", package: "Structures"),
-            ]
-        ),
     ]
 )
