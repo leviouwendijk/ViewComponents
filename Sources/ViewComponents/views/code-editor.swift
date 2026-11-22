@@ -2,15 +2,15 @@ import SwiftUI
 import plate
 
 public struct CodeEditorContainer: View {
-    @State public var text: Binding<String>
-    @State public var wrap = false
+    public let text: Binding<String>
+    @StoredState public var wrap: Bool
 
     public init(
         text: Binding<String>,
         wrap: Bool = false
     ) {
         self.text = text
-        self.wrap = wrap
+        self._wrap = StoredState(initialValue: wrap)
     }
 
     public var body: some View {

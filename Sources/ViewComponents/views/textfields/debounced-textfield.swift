@@ -3,11 +3,11 @@ import SwiftUI
 public struct DebouncedField: View {
     public let label: String
     public let placeholder: String
-    @State private var buffer: String
+    @StoredState private var buffer: String
     public let ms: Int
     public let onCommit: (String) -> Void
 
-    @State private var workItem: DispatchWorkItem?
+    @StoredState private var workItem: DispatchWorkItem?
 
     public init(
         label: String,
@@ -20,7 +20,7 @@ public struct DebouncedField: View {
         self.placeholder = placeholder
         self.ms          = ms
         self.onCommit    = onCommit
-        self._buffer     = State(initialValue: text)
+        self._buffer     = StoredState(initialValue: text)
     }
 
     public var body: some View {

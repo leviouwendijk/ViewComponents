@@ -40,7 +40,7 @@ public struct StandardButton: View {
     // public let image: String?
     public let appearance: ButtonAppearanceConfiguration?
 
-    @State private var isPressed: Bool = false
+    @StoredState private var isPressed: Bool = false
     @Environment(\.isEnabled) private var isEnabled: Bool
 
     public init(

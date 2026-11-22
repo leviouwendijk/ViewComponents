@@ -14,7 +14,7 @@ public struct SimpleTextField: View {
 
     @Binding public var text: String
     @FocusState private var isFocused: Bool
-    @State private var validationMessage: String?
+    @StoredState private var validationMessage: String?
 
     public var placeholderFormatted: String? {
         if let placeholder {

@@ -7,7 +7,7 @@ public struct SwipeFadeContainer<Content: View>: View {
     public var threshold: CGFloat = 80
     public var animationDuration: Double = 0.25
     
-    @State private var isVisible: Bool = true
+    @StoredState private var isVisible: Bool = true
     @GestureState private var dragOffset: CGFloat = 0
     
     public init(

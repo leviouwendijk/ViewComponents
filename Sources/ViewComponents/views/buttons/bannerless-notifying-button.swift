@@ -10,7 +10,7 @@ public struct BannerlessNotifyingButton: View {
     public let animationDuration: TimeInterval
     @ObservedObject public var notifier: NotificationBannerController
 
-    @State private var isPressed: Bool = false
+    @StoredState private var isPressed: Bool = false
     @Environment(\.isEnabled) private var isEnabled: Bool
 
     public init(

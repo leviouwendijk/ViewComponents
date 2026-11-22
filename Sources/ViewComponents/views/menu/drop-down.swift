@@ -6,7 +6,7 @@ where
     Option.RawValue == String
 {
     @Binding public var selected: Option
-    @State private var isExpanded: Bool = false
+    @StoredState private var isExpanded: Bool = false
 
     public let labelWidth: CGFloat
     public let maxListHeight: CGFloat

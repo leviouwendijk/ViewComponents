@@ -10,15 +10,15 @@ public struct ThrowingEscapableButton: View {
     public let action: @MainActor () async throws -> Void
     public let animationDuration: TimeInterval
 
-    @State private var isPressed: Bool = false
+    @StoredState private var isPressed: Bool = false
     @Environment(\.isEnabled) private var isEnabled: Bool
 
-    @State private var buttonSize: CGSize = .zero
-    @State private var isCanceling: Bool = false
-    @State private var showActionResult: Bool = false
+    @StoredState private var buttonSize: CGSize = .zero
+    @StoredState private var isCanceling: Bool = false
+    @StoredState private var showActionResult: Bool = false
 
-    @State private var actionSuccess: Bool = false
-    @State private var actionMessage: String = ""
+    @StoredState private var actionSuccess: Bool = false
+    @StoredState private var actionMessage: String = ""
 
     public init(
         type: StandardButtonType,

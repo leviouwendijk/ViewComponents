@@ -18,7 +18,7 @@ public struct StandardNotifyingButton: View {
     @ObservedObject public var notifier: NotificationBannerController
     public let notifierPosition: NotificationBannerPosition
 
-    @State private var isPressed: Bool = false
+    @StoredState private var isPressed: Bool = false
     @Environment(\.isEnabled) private var isEnabled: Bool
 
     public init(

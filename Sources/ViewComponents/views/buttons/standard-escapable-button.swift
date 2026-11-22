@@ -10,11 +10,11 @@ public struct StandardEscapableButton: View {
     public let action: @MainActor () async -> Void
     public let animationDuration: TimeInterval
 
-    @State private var isPressed: Bool = false
+    @StoredState private var isPressed: Bool = false
     @Environment(\.isEnabled) private var isEnabled: Bool
 
-    @State private var buttonSize: CGSize = .zero
-    @State private var isCanceling: Bool = false
+    @StoredState private var buttonSize: CGSize = .zero
+    @StoredState private var isCanceling: Bool = false
 
     public init(
         type: StandardButtonType,
