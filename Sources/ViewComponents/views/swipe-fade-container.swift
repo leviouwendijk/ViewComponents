@@ -1,4 +1,5 @@
 import SwiftUI
+import ViewPrimitives
 import plate
 
 public struct SwipeFadeContainer<Content: View>: View {

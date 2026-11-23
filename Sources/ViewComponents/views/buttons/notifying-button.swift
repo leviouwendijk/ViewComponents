@@ -1,5 +1,6 @@
 import Foundation
 import SwiftUI
+import ViewPrimitives
 import plate
 
 public enum NotificationBannerPosition {

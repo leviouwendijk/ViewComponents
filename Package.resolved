@@ -1,5 +1,5 @@
 {
-  "originHash" : "cc17473ef859029a5911827b355e915b5f09ed63405deb4434d12783d1b428ca",
+  "originHash" : "f5f6df94ee59ba26b414d6284cb7bb6d0f43a4cb859d039982a9990f5cd00f16",
   "pins" : [
     {
       "identity" : "ansi",
@@ -169,7 +169,7 @@
       "location" : "https://github.com/leviouwendijk/Path.git",
       "state" : {
         "branch" : "master",
-        "revision" : "dd259e212af9e97ba5e91bd3216be9688eb7df25"
+        "revision" : "3cef050339e68298c869b98daf25401c06531a91"
       }
     },
     {
@@ -287,6 +287,15 @@
       "state" : {
         "branch" : "master",
         "revision" : "a52f358adda442f563771a318fc70d6a02c6b16e"
+      }
+    },
+    {
+      "identity" : "viewprimitives",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/leviouwendijk/ViewPrimitives.git",
+      "state" : {
+        "branch" : "master",
+        "revision" : "867da23e44d75d81bf73d6dc3cf073d5136625f2"
       }
     }
   ],
